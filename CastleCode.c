@@ -1,9 +1,9 @@
 
 task main()
 {
-	if (SensorValue(startbutton) = 1)//If the start button is pressed
+	if(SensorValue(startbutton) = 1)//If the start button is pressed
 	{
-		startvariable = 1; //Change the variable start to 1
+		start = 1; //Change the variable start to 1
 		while(startvariable = 1) //While the variable start is equal to 1
 		{
 			clearTimer(Castle1Timer); //Clear the 1st castle timer
@@ -11,11 +11,85 @@ task main()
 			castle_score1 = 0; //Set castle_score1 to 0
 			castle_score2 = 0; //Set castle_score2 to 0
 		}
+		
 		if (SensorValue(Castle1point1) = 1) //If the limit switch1 is pressed (over the 1st wall)
 		{
-			castle_score2 = castle_score2 + 1; 	//Add one to the score
-			turnLEDOn(castle1LED1); //Turn on the 1st LED for 2 seconds
+			castle_score2 += 1; 	//Add one to the score
+			turnLEDOn(castle2LED1); //Turn on the 1st LED for 2 seconds
+			wait(2); 		//for 2 seconds
+			turnLEDOff(castle2LED1);
 		}
+		
+		if (SensorValue(Castle1point2) = 1) //If the limit switch1 is pressed (over the 2nd wall)
+		{
+			castle_score2 += 2; 	//Add two to the score
+			turnLEDOn(castle2LED2); //Turn on the 2nd LED for 2 seconds
+			wait(2); 		//for 2 seconds
+			turnLEDOff(castle2LED2);
+		}
+		
+		if (SensorValue(Castle1point3) = 1) //If the limit switch1 is pressed (over the 3rd wall)
+		{
+			castle_score2 += 3; 	//Add three to the score
+			turnLEDOn(castle2LED3); //Turn on the 3rd LED 
+			wait(2); 		//for 2 seconds
+			turnLEDOff(castle2LED3);
+		}
+		if (SensorValue(Castle1king)<100)
+		{
+			time1 = Time[T1];
+			castle = 2;
+		}	
+		if (SensorValue(Castle2point1) = 1) //If the limit switch1 is pressed (over the 1st wall)
+		{
+			castle_score1 += 1; 	//Add one to the score
+			turnLEDOn(castle1LED1); //Turn on the 1st LED 
+			wait(2); 		//for 2 seconds
+			turnLEDOff(castle1LED1);
+		}
+		
+		if (SensorValue(Castle2point2) = 1) //If the limit switch1 is pressed (over the 2nd wall)
+		{
+			castle_score1 += 2; 	//Add two to the score
+			turnLEDOn(castle1LED2); //Turn on the 2nd LED for 2 seconds
+			wait(2); 		//for 2 seconds
+			turnLEDOff(castle1LED2);
+		}
+		
+		if (SensorValue(Castle2point3) = 1) //If the limit switch1 is pressed (over the 3rd wall)
+		{
+			castle_score1 += 3; 	//Add three to the score
+			turnLEDOn(castle1LED3); //Turn on the 3rd LED 
+			wait(2); 		//for 2 seconds
+			turnLEDOff(castle1LED3);
+		}
+		if (SensorValue(Castle2king)<100)
+		{
+			time1 = Time[T1];
+			start = 0;
+			castle = 1
+			
+		}
+	if castle = 1
+	{
+			turnLEDOn(castle1LED1);
+			turnLEDOn(castle1LED2);
+			turnLEDOn(castle1LED3);
+			wait(2);
+			turnLEDOff(castle1LED1);
+			turnLEDOff(castle1LED2);
+			turnLEDOff(castle1LED3);
+	}
+	if castle = 2
+	{
+			turnLEDOn(castle2LED1);
+			turnLEDOn(castle2LED2);
+			turnLEDOn(castle2LED3);
+			wait(2);
+			turnLEDOff(castle2LED1);
+			turnLEDOff(castle2LED2);
+			turnLEDOff(castle2LED3);
+	}
 	}
 
 	//If the 2nd limit switch is pressed (over the 2nd wall)
